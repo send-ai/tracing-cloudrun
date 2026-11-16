@@ -1,0 +1,26 @@
+#!/bin/bash
+
+source ./bin/_cli.sh
+
+_dc(){
+  docker compose -f .dockerdev/compose.yaml "$@"
+}
+
+_dc-run(){
+  _dc run --rm "$@"
+}
+
+app-shell(){
+ _dc-run app bash
+}
+
+setup(){
+ _dc-run app cargo build
+}
+
+test(){
+ _dc-run app cargo fmt --check
+ _dc-run app cargo clippy -- -Dwarnings --no-deps
+}
+
+_cli $@

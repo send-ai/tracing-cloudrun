@@ -1,0 +1,6 @@
+.dockerdev/
+
+
+target
+.DS_Store
+.env
